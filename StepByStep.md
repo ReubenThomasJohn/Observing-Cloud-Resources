@@ -65,7 +65,7 @@ Do: ```aws eks --region us-east-2  update-kubeconfig --name udacity-cluster```
 
 16. Create the ```prometheus-additional.yaml``` file. This will be used later to install `blackbox-exporter` in the kubernetes cluster. Use https://github.com/prometheus-operator/prometheus-operator/blob/main/example/additional-scrape-configs/prometheus-additional.yaml. 
 
-17. In this file, add an additional target to the EC2 instance, node-exporter. 
+17. In this file, add an additional target to the EC2 instance, node-exporter. The ip of the EC2 will change if re-created.
 
 18. Obtain the latest ```values.yaml``` file from https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/values.yaml.
 
@@ -91,5 +91,5 @@ helm repo update`.
 23. Log into Grafana using the credentials 
 `user: admin & password: prom-operator`
 
-24. Inside postman, in the environment tab - add the public-ip as the public ip of the EC2 server, and the username as ubuntu. 
+24. Inside postman, in the environment tab - add the public-ip as the public ip of the EC2 server, and the username as ubuntu. (Make sure the EC2 instance is still up and running)
 

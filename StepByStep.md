@@ -23,9 +23,9 @@ to create a copy of the above ID in us-east02.
 
 10. Check if the EKS stack and EC2 instance with username ubuntu have been created. (Check in us-east-2)
 
-11. SSH into the EC2 instance using ``` ssh -i ssh -i /path/key-pair-name.pem instance-user-name@instance-public-dns-name ```
+11. SSH into the EC2 instance using ``` ssh -i /path/key-pair-name.pem instance-user-name@instance-public-dns-name ```
 
-12. Install node_exporter using ``` sudo useradd --no-create-home --shell /bin/false node_exporter
+12. Install node_exporter using `sudo useradd --no-create-home --shell /bin/false node_exporter
 wget https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
 tar xvfz node_exporter-1.2.2.linux-amd64.tar.gz
 sudo cp node_exporter-1.2.2.linux-amd64/node_exporter /usr/local/bin
@@ -65,7 +65,7 @@ Do: ```aws eks --region us-east-2  update-kubeconfig --name udacity-cluster```
 
 16. Create the ```prometheus-additional.yaml``` file. This will be used later to install `blackbox-exporter` in the kubernetes cluster. Use https://github.com/prometheus-operator/prometheus-operator/blob/main/example/additional-scrape-configs/prometheus-additional.yaml. 
 
-17. In this file, add an additional target to the EC2 instance, node-exporter. The ip of the EC2 will change if re-created.
+17. In this file, add an additional target to the EC2 instance, ```http://ip_addr```. The ip of the EC2 will change if re-created.
 
 18. Obtain the latest ```values.yaml``` file from https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/values.yaml.
 
@@ -86,10 +86,18 @@ helm repo update`.
 21. Install the monitoring stack in the Kubernetes cluster using helm. 
 `helm install prometheus prometheus-community/kube-prometheus-stack -f "starter/values.yaml" --namespace monitoring`
 
-22. Open Lens, add the cluster, enable the monitoring namespace, and check if prometheus and grafana have been deployed. 
+22. Open Lens, add the cluster, select the monitoring namespace, and check if prometheus and grafana have been deployed. 
 
 23. Log into Grafana using the credentials 
 `user: admin & password: prom-operator`
 
-24. Inside postman, in the environment tab - add the public-ip as the public ip of the EC2 server, and the username as ubuntu. (Make sure the EC2 instance is still up and running)
+24. Inside postman, in the environment tab - add the public-ip as the public ip of the EC2 server, and the username as ubuntu. (Make sure the EC2 instance is still up and running) Only the ip must be added, and not the port number. Run it.
+
+25. Save the bearer token number. Paste it on line 116 in the `blackbox-values.yaml` file. 
+
+26. In grafana, create the required dashboards.
+
+27. Then, install blackbox-exporter using ```helm install prometheus-blackbox-exporter prometheus-community/prometheus-blackbox-exporter -f "blackbox-values.yaml" --namespace monitoring```
+
+28. Import dashboard 7587 in Grafana. 
 

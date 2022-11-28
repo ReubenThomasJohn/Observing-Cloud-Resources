@@ -113,7 +113,7 @@ config:
         - 200
         # - 401
         # - 403
-        bearer_token: RZPSR3LD30MJWKXFJBRMNTUOS1DZVU9TK842GACETMUUB1BCCO # value changes: need to take from Postman
+        bearer_token: RN1FQ6OUIFBILWUGPG42Z5Z4F9F4LANLB578PLZJBYLT7OTCPF # value changes: need to take from Postman
 # Set custom config path, other than default /config/blackbox.yaml. If let empty, path will be "/config/blackbox.yaml"
 # configPath: "/foo/bar"
 

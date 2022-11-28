@@ -4,7 +4,7 @@
     module: [http_2xx]
   static_configs:
     - targets:
-      - http://3.14.245.210 # EC2 Instance ip address.
+      - http://3.143.68.48 # EC2 Instance ip address.
   relabel_configs:
   - source_labels: [__address__]
     target_label: __param_target
